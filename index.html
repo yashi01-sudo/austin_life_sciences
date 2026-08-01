@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Austin Life Sciences | Experience Better Health With Us</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary: #0052cc;
+            --primary-gradient: linear-gradient(135deg, #0052cc 0%, #003d99 100%);
+            --secondary: #00a8a8;
+            --dark: #0a192f;
+            --light-bg: #f4f7fa;
+            --white: #ffffff;
+            --glass: rgba(255, 255, 255, 0.96);
+            --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: var(--light-bg); color: #333; overflow-x: hidden; scroll-behavior: smooth; line-height: 1.6; }
+        h1, h2, h3, h4 { font-family: 'Poppins', sans-serif; }
+
+        nav { position: fixed; top: 0; width: 100%; z-index: 1000; background: var(--glass); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(0,0,0,0.08); padding: 10px 0; }
+        .nav-wrapper { display: flex; justify-content: space-between; align-items: center; max-width: 1400px; margin: 0 auto; padding: 0 25px; }
+        .logo { display: flex; align-items: center; gap: 15px; text-decoration: none; }
+        .logo-circle { width: 60px; height: 60px; border-radius: 50%; overflow: hidden; border: 2px solid #fff; box-shadow: 0 4px 10px rgba(0,0,0,0.1); background: #fff; }
+        .logo-circle img { width: 100%; height: 100%; object-fit: contain; }
+        .logo-text h1 { font-size: 1.3rem; color: var(--primary); margin: 0; letter-spacing: 0.5px; line-height: 1; font-weight: 800; }
+        .logo-text span { font-size: 0.65rem; font-weight: 700; color: #777; display: block; text-transform: uppercase; margin-top: 3px; }
+
+        .nav-links { display: flex; gap: 35px; list-style: none; margin: 0; }
+        .nav-links li a { text-decoration: none; color: var(--dark); font-weight: 600; font-size: 0.8rem; display: flex; flex-direction: column; align-items: center; gap: 5px; transition: var(--transition); text-transform: uppercase; letter-spacing: 0.5px; }
+        .nav-links li a i { font-size: 1.1rem; color: var(--primary); opacity: 0.8; }
+        .nav-links li a:hover { color: var(--primary); transform: translateY(-3px); }
+
+        .hero { height: 90vh; background: linear-gradient(rgba(10, 25, 47, 0.75), rgba(0, 82, 204, 0.4)), url('https://images.unsplash.com/photo-1579154204601-01588f351e67?auto=format&fit=crop&q=80&w=1920'); background-size: cover; background-position: center; display: flex; align-items: center; color: white; }
+        .hero-content { max-width: 900px; padding: 0 25px; margin: 0 auto; text-align: center; }
+        .hero h2 { font-size: 4.5rem; font-weight: 800; line-height: 1.1; margin-bottom: 25px; letter-spacing: -1px; }
+        .hero p { font-size: 1.2rem; opacity: 0.95; margin: 0 auto 45px; line-height: 1.7; max-width: 750px; font-weight: 300; }
+
+        .hero-btn-group { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
+        .btn-premium-solid { background: var(--primary-gradient); color: white; padding: 18px 45px; border-radius: 50px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; font-size: 0.85rem; border: none; cursor: pointer; box-shadow: 0 10px 25px rgba(0, 82, 204, 0.4); transition: var(--transition); text-decoration: none; }
+        .btn-premium-outline { background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); color: white; padding: 18px 45px; border-radius: 50px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; font-size: 0.85rem; border: 2px solid rgba(255, 255, 255, 0.8); cursor: pointer; transition: var(--transition); text-decoration: none; }
+
+        .search-area { max-width: 700px; margin: -55px auto 60px; position: relative; z-index: 10; }
+        .search-area input { width: 100%; padding: 25px 35px; border-radius: 100px; border: none; box-shadow: 0 20px 50px rgba(0,0,0,0.12); font-size: 1.1rem; outline: none; }
+
+        .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 35px; padding: 0 25px; max-width: 1400px; margin: 0 auto; }
+        .p-card { background: white; border-radius: 24px; overflow: hidden; border: 1px solid #eee; transition: var(--transition); display: flex; flex-direction: column; }
+        .p-img { height: 180px; padding: 20px; display: flex; align-items: center; justify-content: center; background: #fff; }
+        .p-img img { max-width: 100%; max-height: 100%; object-fit: contain; }
+        .p-info { padding: 20px; text-align: center; flex-grow: 1; }
+        .p-name { font-size: 1.1rem; font-weight: 700; color: var(--dark); margin-bottom: 5px; }
+        .p-salt { font-size: 0.75rem; color: #777; margin-bottom: 15px; min-height: 45px; }
+
+        .qty-selector { display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 15px; background: #f0f4f8; padding: 8px; border-radius: 50px; width: 130px; margin: 0 auto 15px; }
+        .qty-btn { width: 28px; height: 30px; border-radius: 50%; border: none; background: white; color: var(--primary); font-weight: 800; cursor: pointer; }
+        .qty-input { width: 35px; text-align: center; border: none; background: transparent; font-weight: 700; }
+
+        .btn-add { width: 100%; background: #f8fafc; border: none; padding: 15px; font-weight: 700; color: var(--primary); cursor: pointer; transition: 0.3s; border-top: 1px solid #eee; text-transform: uppercase; font-size: 0.75rem; }
+        .btn-add.active { background: var(--primary); color: white; }
+
+        .lab-section { background: white; padding: 100px 0; border-top: 1px solid #eee; }
+        .lab-container { max-width: 1400px; margin: 0 auto; padding: 0 25px; display: flex; align-items: center; gap: 80px; flex-wrap: wrap; }
+        .lab-image { flex: 1.2; min-width: 450px; border-radius: 40px; overflow: hidden; box-shadow: 0 40px 80px rgba(0,0,0,0.12); }
+        .lab-image img { width: 100%; height: auto; display: block; }
+        .lab-content { flex: 1.3; min-width: 450px; }
+
+        .drawer { position: fixed; right: -420px; top: 0; width: 400px; height: 100vh; background: white; z-index: 2000; box-shadow: -20px 0 60px rgba(0,0,0,0.2); transition: 0.5s; padding: 40px; display: flex; flex-direction: column; }
+        .drawer.active { right: 0; }
+        .drawer-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1999; display: none; backdrop-filter: blur(8px); }
+        .drawer-overlay.active { display: block; }
+        .basket-item { background: #f9fbff; border-radius: 15px; padding: 15px; margin-bottom: 12px; border: 1px solid #edf2f7; display: flex; justify-content: space-between; align-items: center; }
+
+        .basket-trigger { position: relative; cursor: pointer; padding: 12px; border-radius: 50%; background: #fff; box-shadow: 0 4px 12px rgba(0,0,0,0.05); transition: 0.3s; }
+        .basket-count { position: absolute; top: -5px; right: -5px; background: #ff3b30; color: white; font-size: 10px; font-weight: 800; border-radius: 50%; width: 22px; height: 22px; display: flex; align-items: center; justify-content: center; border: 2px solid white; }
+
+        footer { background: var(--dark); color: white; padding: 80px 0 40px; }
+        .footer-logo-box { display: flex; align-items: center; gap: 15px; margin-bottom: 25px; }
+        .footer-logo-box img { width: 55px; height: 55px; border-radius: 50%; background: #fff; padding: 5px; }
+
+        @media (max-width: 992px) { .hero h2 { font-size: 3rem; } .nav-links { display: none; } .lab-image, .lab-content { min-width: 100%; } }
+    </style>
+</head>
+<body>
+
+    <div class="drawer-overlay" id="overlay" onclick="toggleBasket()"></div>
+
+    <aside class="drawer" id="drawer">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px;">
+            <h3 style="color:var(--primary); font-weight:800; font-size: 1.5rem;">Inquiry Basket</h3>
+            <button onclick="toggleBasket()" style="border:none; background:none; font-size: 40px; cursor:pointer; color:#ccc;">&times;</button>
+        </div>
+        <div id="basketList" style="flex-grow: 1; overflow-y: auto;">
+            <p style="text-align: center; margin-top: 100px; opacity: 0.4;">Your basket is empty.</p>
+        </div>
+        <div style="padding-top: 30px; border-top: 1px solid #eee;">
+            <input type="text" id="custName" placeholder="Organization / Pharmacy Name" style="width:100%; padding: 18px; border-radius: 15px; border:1px solid #ddd; margin-bottom:20px; outline: none; font-family: inherit;">
+            <button type="button" class="btn-premium-solid" onclick="checkoutWhatsApp()" style="width:100%; display: flex; align-items: center; justify-content: center; gap: 10px;">
+                <i class="fab fa-whatsapp" style="font-size: 1.4rem;"></i> SEND ENQUIRY
+            </button>
+        </div>
+    </aside>
+
+    <nav>
+        <div class="nav-wrapper">
+            <a href="#" class="logo">
+                <div class="logo-circle">
+                    <img src="logo.jpg" alt="ALS Logo" onerror="this.src='https://placehold.co/100x100/0052cc/ffffff?text=ALS'">
+                </div>
+                <div class="logo-text">
+                    <h1>AUSTIN</h1>
+                    <span>LIFE SCIENCES</span>
+                </div>
+            </a>
+            <ul class="nav-links">
+                <li><a href="#home"><i class="fas fa-house-medical"></i>Home</a></li>
+                <li><a href="#products"><i class="fas fa-boxes-stacked"></i>Catalogue</a></li>
+                <li><a href="#about"><i class="fas fa-microscope"></i>Research</a></li>
+                <li><a href="#contact"><i class="fas fa-headset"></i>Contact</a></li>
+            </ul>
+            <div class="nav-actions">
+                <div class="basket-trigger" onclick="toggleBasket()">
+                    <i class="fas fa-clipboard-list" style="color:var(--primary)"></i>
+                    <span class="basket-count" id="cartCount">0</span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero" id="home">
+        <div class="hero-content" data-aos="fade-up">
+            <h2>Experience <br><span style="color: var(--secondary);">Better Health</span> With Us</h2>
+            <p>Austin Life Sciences is a premium pharmaceutical manufacturing and marketing company dedicated to advancing healthcare through innovation, quality, and reliability.</p>
+            <div class="hero-btn-group">
+                <a href="#products" class="btn-premium-solid">Explore Products</a>
+                <a href="#contact" class="btn-premium-outline">Get In Touch</a>
+            </div>
+        </div>
+    </header>
+
+    <section id="products" style="padding: 100px 0;">
+        <div class="section-header" data-aos="fade-up">
+            <h2>Comprehensive Portfolio</h2>
+            <p>From tablets and capsules to syrups and injectables, we follow globally recognized WHO-GMP quality standards.</p>
+        </div>
+        <div class="search-area" data-aos="fade-up">
+            <input type="text" id="search" placeholder="Search 60+ products by name or generic salt...">
+        </div>
+
+        <div class="product-grid" id="productGrid"></div>
+    </section>
+
+    <section class="lab-section" id="about">
+        <div class="lab-container">
+            <div class="lab-image" data-aos="fade-right">
+                <img src="lab.jpg" alt="ALS Lab" onerror="this.src='https://images.unsplash.com/photo-1532187875605-1ce19028194b?q=80&w=1200'">
+            </div>
+            <div class="lab-content" data-aos="fade-left">
+                <h3>Innovation & Excellence</h3>
+                <p>Austin Life Sciences focuses on delivering safe, effective, and affordable healthcare solutions by combining modern technology with strict quality standards.</p>
+                <p>Driven by the vision of “Experience Better Health With Us,” we work towards improving patient outcomes and building long-term partnerships worldwide.</p>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 40px;">
+                    <div>
+                        <h5 style="color:var(--primary); font-weight: 800;"><i class="fas fa-check-double" style="color:var(--secondary); margin-right: 10px;"></i> Verified Efficacy</h5>
+                        <p style="font-size: 0.85rem; opacity: 0.7;">WHO-GMP Standards.</p>
+                    </div>
+                    <div>
+                        <h5 style="color:var(--primary); font-weight: 800;"><i class="fas fa-flask-vial" style="color:var(--secondary); margin-right: 10px;"></i> Advanced R&D</h5>
+                        <p style="font-size: 0.85rem; opacity: 0.7;">State-of-the-art facility.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <div class="footer-logo-box">
+                    <img src="logo.jpg" alt="ALS Logo" onerror="this.src='https://placehold.co/100x100/0052cc/ffffff?text=ALS'">
+                    <h3 style="color:white; font-weight: 800; margin: 0; font-size: 1.4rem;">Austin Life Sciences</h3>
+                </div>
+                <p>Advancing healthcare through safety, efficacy, and globally recognized formulations.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Contact Us</h4>
+                <ul>
+                    <li><i class="fas fa-phone"></i> +91 7351404200</li>
+                    <li><i class="fas fa-envelope"></i> austinlifesciencess@gmail.com</li>
+                    <li><i class="fas fa-map-location-dot"></i> Saharanpur, UP, India</li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Quick Access</h4>
+                <ul>
+                    <li><a href="#products" style="color:white; text-decoration: none;">Full Catalogue</a></li>
+                    <li><a href="#about" style="color:white; text-decoration: none;">Quality Ethics</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2019 Austin Life Sciences. All Rights Reserved. | Manufacturing Hub: Saharanpur, UP.
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 1000, once: true });
+
+        // ALL 60 PRODUCTS FROM BROCHURE
+        const products = [
+            // TABLETS
+            { id: 1, name: "TREPOD 200mg", salt: "Cefpodoxime Proxetil 200mg", pack: "10x10 alu-alu" },
+            { id: 2, name: "AUSICEF-200 TAB", salt: "Cefixime 200mg", pack: "10x10 alu-alu" },
+            { id: 3, name: "AUSICEF-O TAB", salt: "Cefixime 200mg + Ofloxacin 200mg", pack: "10x1x10 alu-alu" },
+            { id: 4, name: "OFLORIS 200mg", salt: "Ofloxacin 200mg", pack: "20x10 alu-alu" },
+            { id: 5, name: "OFLORIS-OZ", salt: "Ofloxacin 200mg + Ornidazole 500mg", pack: "10x10" },
+            { id: 6, name: "COZE-10 TAB", salt: "Cetirizine 10mg", pack: "1x6x10" },
+            { id: 7, name: "D. P. C KUF & FLU TAB", salt: "DeXtromethorphan + Phenylephrine + CPM", pack: "10x10" },
+            { id: 8, name: "SOMIC-PLUS TAB (GOLDEN)", salt: "Nimesulide 100mg + Paracetamol 325mg", pack: "20x10" },
+            { id: 9, name: "SOMIC-PLUS TAB (CLEAR)", salt: "Nimesulide 100mg + Paracetamol 325mg", pack: "10x10" },
+            { id: 10, name: "SOMIC-PLUS TAB (D/L)", salt: "Nimesulide 100mg + Paracetamol 325mg", pack: "10x10" },
+            { id: 11, name: "MEIFAM-SPAS TAB", salt: "Mefenamic Acid 250mg + Dicyclomine 10mg", pack: "10x10" },
+            { id: 12, name: "ARTHORIS-MR", salt: "Diclo Sod 50mg + Para 325mg + Chlozoxazone 250mg", pack: "10x10" },
+            { id: 13, name: "AUSIOFLO-TAB (BLISTER)", salt: "Ofloxacin 200mg", pack: "10x10" },
+            { id: 14, name: "AS-MOXCV 625", salt: "Amoxycillin 500mg + Clavulanic Acid 125mg", pack: "10x6x1" },
+            { id: 15, name: "OSYCAL", salt: "Calcium 500mg + Vitamin D3 250 I.U.", pack: "10x15" },
+            { id: 16, name: "MOVIFEN PLUS (CLEAR, & D/L)", salt: "Diclo Sod 50mg + Paracetamol 325mg", pack: "20x10" },
+            { id: 17, name: "AUCIMOL-FORTE", salt: "Aceclofenac 100mg + Paracetamol 325mg", pack: "10x10" },
+            { id: 18, name: "AUCITIN COLD TAB", salt: "Paracetamol 325mg + Levocetirizine 5mg + Phenyl.", pack: "10x10 alu-alu" },
+            { id: 19, name: "ARTHAZOX-S TAB", salt: "Aceclofenac + Paracetamol + Serratiopeptidase", pack: "10x10 alu-alu" },
+            { id: 20, name: "AUCILOV-LC", salt: "Levocetirizine 5mg + Montelukast 10mg", pack: "20x10" },
+            { id: 21, name: "AUCILIVO-5", salt: "Levocetirizine 5mg", pack: "20x10" },
+            { id: 22, name: "AUSILOC-TAB", salt: "Ranitidine 150mg", pack: "20x10" },
+            { id: 23, name: "AUSILOC-RD TAB", salt: "Ranitidine + Domperidone", pack: "20x10" },
+            // POWDER
+            { id: 24, name: "VITAGLOW POWDER", salt: "Protein Powder in Chocolate Flavour", pack: "200gm" },
+            // CAPSULES
+            { id: 25, name: "PANTATIN-DSR", salt: "Pantoprazole 40mg + Domperidone 30mg SR", pack: "10x10 alu-alu" },
+            { id: 26, name: "RABITIN-DSR", salt: "Rabeprazole Sodium 20mg + Domperidone 30mg SR", pack: "10x10 alu-alu" },
+            { id: 27, name: "AUSLYCO-G CAP.", salt: "Antioxidants with Vitamins", pack: "10x1x10" },
+            { id: 28, name: "AUSICAL-K27", salt: "Vitamin K27+", pack: "10x1x10" },
+            { id: 29, name: "3MOX 250-CAP", salt: "Amoxicilline 250mg", pack: "10x3x5" },
+            { id: 30, name: "3MOX 500mg", salt: "Amoxicilline 500mg", pack: "10x10" },
+            { id: 31, name: "ULCID 20mg", salt: "Omeprazole 20mg", pack: "15x20" },
+            { id: 32, name: "ULCID-D", salt: "Omeprazole 20mg + Domperidone 10mg", pack: "15x20" },
+            // LIQUIDS
+            { id: 33, name: "OFLORIS", salt: "Ofloxacin 50mg", pack: "30ml/60ml" },
+            { id: 34, name: "OFLORIS - M", salt: "Ofloxacin Metro", pack: "60ml" },
+            { id: 35, name: "BEGODRIL EXPECTORANT", salt: "Diphenhydramine + Ammonium + Menthol", pack: "100ml" },
+            { id: 36, name: "AUSICOF DX-SYRUP", salt: "Cough Syrup", pack: "100ml" },
+            { id: 37, name: "AUSICEF DRY SYRUP", salt: "Cefixime 50mg", pack: "30ml" },
+            { id: 38, name: "AUSIPOD 50mg", salt: "Cefpodoxime 50mg", pack: "30ml" },
+            { id: 39, name: "AUSIPOD 100mg", salt: "Cefpodoxime 100mg", pack: "30ml" },
+            { id: 40, name: "ASMOX CV DRY SYRUP", salt: "Amoxycillin 200mg + Clav 28.5mg", pack: "30ml" },
+            { id: 41, name: "AUSICET COLD SYRUP", salt: "Levocetirizine + Paracetamol + Phenyl.", pack: "60ml" },
+            { id: 42, name: "GETFER-TONIC", salt: "Iron Tonic", pack: "200ml" },
+            { id: 43, name: "ASMOX-30ml", salt: "Amoxycilline 125mg", pack: "30ml" },
+            { id: 44, name: "AUSIGEL-MPS", salt: "Antacid", pack: "170ml" },
+            { id: 45, name: "AUSILIVO-M SUS", salt: "Levocetirizine + Montelukast", pack: "60ml" },
+            { id: 46, name: "ASIDRYL-LS", salt: "Guaiphenesin + Ambroxol + Levosalbutamol", pack: "100ml" },
+            { id: 47, name: "AUSTINLIVOSAFE-DS", salt: "Liver Tonic", pack: "200ml" },
+            { id: 48, name: "AUSIMEF- PLUS", salt: "Mefenic Para", pack: "60ml" },
+            { id: 49, name: "IRON POWER SYRUP", salt: "Iron Tonic", pack: "500ml" },
+            { id: 50, name: "AUSITOXX +", salt: "Ambroxol + Guaiph + Terbutoline", pack: "100ml" },
+            { id: 51, name: "ONDI DROPS", salt: "Ondastrone", pack: "30ml" },
+            // INJECTIONS
+            { id: 52, name: "OMIKA 500mg", salt: "Amikacin", pack: "500mg" },
+            { id: 53, name: "AC-CEF 1", salt: "Ceftriaxonesod. Sterile", pack: "1000mg" },
+            { id: 54, name: "AC-CEF 1.5", salt: "Ceftriaxonesod.", pack: "1.5mg" },
+            { id: 55, name: "AUCIFAST 2500", salt: "Methylcobalamin 2500mcg", pack: "1ml" },
+            { id: 56, name: "PANTATIN", salt: "Pantorazole 40mg", pack: "10ml" },
+            // OINTMENTS
+            { id: 57, name: "MOVIFEN- GEL", salt: "Diclofenac Diethylamina Linseed oil", pack: "30gm" },
+            { id: 58, name: "KT-6", salt: "Kataconazole + Neomycin + Clobetasol", pack: "15gm" },
+            { id: 59, name: "AUSTIN ANTIMYCO POWDER", salt: "Clotrimazole Absorbent Powder", pack: "75gm" },
+            { id: 60, name: "KALMAY-SOAP", salt: "Kataconazole 2%", pack: "75gm" }
+        ];
+
+        let cart = [];
+
+        function renderProducts(data) {
+            const grid = document.getElementById('productGrid');
+            grid.innerHTML = data.map(p => `
+                <div class="p-card" data-aos="fade-up">
+                    <div class="p-img"><img src="placeholder.jpg" alt="${p.name}" onerror="this.src='https://placehold.co/300x200/f8fafc/0052cc?text=${p.name}'"></div>
+                    <div class="p-info">
+                        <h4 class="p-name">${p.name}</h4>
+                        <p class="p-salt">${p.salt}</p>
+                        <p style="font-size:0.75rem; color:#888; margin-bottom:10px;">${p.pack}</p>
+                        <div class="qty-selector">
+                            <button type="button" class="qty-btn" onclick="updateLocalQty(${p.id}, -1)">-</button>
+                            <input type="number" id="qty-${p.id}" class="qty-input" value="0" min="0">
+                            <button type="button" class="qty-btn" onclick="updateLocalQty(${p.id}, 1)">+</button>
+                        </div>
+                    </div>
+                    <button type="button" class="btn-add ${cart.find(i=>i.id===p.id)?'active':''}" onclick="addToBasket(${p.id})">
+                        ${cart.find(i=>i.id===p.id)?'<i class="fas fa-check me-2"></i>In Basket':'Add to Inquiry'}
+                    </button>
+                </div>
+            `).join('');
+        }
+
+        function updateLocalQty(id, change) {
+            const input = document.getElementById(`qty-${id}`);
+            let val = parseInt(input.value) + change;
+            if(val < 0) val = 0;
+            input.value = val;
+        }
+
+        function addToBasket(id) {
+            const qtyInput = document.getElementById(`qty-${id}`);
+            let quantity = parseInt(qtyInput.value);
+            if(quantity === 0) quantity = 1;
+
+            const product = products.find(p => p.id === id);
+            const cartIndex = cart.findIndex(i => i.id === id);
+            if(cartIndex === -1) cart.push({...product, quantity: quantity});
+            else cart[cartIndex].quantity = quantity;
+            updateUI();
+        }
+
+        function updateUI() {
+            document.getElementById('cartCount').innerText = cart.length;
+            const list = document.getElementById('basketList');
+            if(cart.length === 0) list.innerHTML = `<p style="text-align:center; opacity:0.3; margin-top:100px;">Basket is empty.</p>`;
+            else list.innerHTML = cart.map((p) => `
+                <div class="basket-item">
+                    <div><strong>${p.name}</strong><br><small>${p.pack}</small></div>
+                    <div style="text-align:right">
+                        <div style="font-weight:800; color:var(--primary)">Qty: ${p.quantity}</div>
+                        <i class="fas fa-trash-alt" style="color:#ff3b30; cursor:pointer; font-size:0.8rem" onclick="removeFromCart(${p.id})"></i>
+                    </div>
+                </div>
+            `).join('');
+            renderProducts(products);
+        }
+
+        function removeFromCart(id) {
+            cart = cart.filter(i => i.id !== id);
+            updateUI();
+        }
+
+        function toggleBasket() {
+            document.getElementById('drawer').classList.toggle('active');
+            document.getElementById('overlay').classList.toggle('active');
+        }
+
+        document.getElementById('search').addEventListener('input', (e) => {
+            const term = e.target.value.toLowerCase();
+            const filtered = products.filter(p => p.name.toLowerCase().includes(term) || p.salt.toLowerCase().includes(term));
+            renderProducts(filtered);
+        });
+
+        function checkoutWhatsApp() {
+            const name = document.getElementById('custName').value || "Client";
+            if(cart.length === 0) return alert("Select products first.");
+            let msg = `Hello Austin Life Sciences, I am ${name}. Bulk Inquiry:%0a`;
+            cart.forEach((p, i) => msg += `${i+1}. *${p.name}* (${p.pack}) - *Qty: ${p.quantity}*%0a`);
+            window.open(`https://wa.me/917351404200?text=${msg}`, '_blank');
+        }
+
+        renderProducts(products);
+    </script>
+</body>
+</html>
